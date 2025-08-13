@@ -7721,5 +7721,918 @@ for (var i = 0; i < atcButtons.length; i++) {
     <script src="//cdn.shopify.com/s/files/1/0690/1995/9522/files/optimizer.js?v=1709233602" type="text/javascript"></script>
 
 </body>
+//versin 1.0
+<!-- <script>
+
+// Change all $ to £ on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Replace all $ symbols with £
+    const textNodes = document.createTreeWalker(
+        document.body,
+        NodeFilter.SHOW_TEXT,
+        null,
+        false
+    );
+    
+    let node;
+    while (node = textNodes.nextNode()) {
+        if (node.textContent.includes('$')) {
+            node.textContent = node.textContent.replace(/\$/g, '£');
+        }
+    }
+    
+    // Update main prices
+    const newPrices = document.querySelectorAll('.moonbundle-option-new-price');
+    if (newPrices.length >= 3) {
+        newPrices[0].textContent = '£49.99'; // Pack of 6
+        newPrices[1].textContent = '£39.99'; // Pack of 4
+        newPrices[2].textContent = '£29.99'; // Pack of 2
+    }
+});
+
+// Variant to URL mapping
+const variantUrls = {
+    // Pack of 6 (Offer 0)
+    '0-Black-28 (XS)': 'https://example.com/product/pack6-black-xs',
+    '0-Black-30 (S)': 'https://example.com/product/pack6-black-s',
+    '0-Black-32 (M)': 'https://example.com/product/pack6-black-m',
+    '0-Black-34 (L)': 'https://example.com/product/pack6-black-l',
+    '0-Black-36 (XL)': 'https://example.com/product/pack6-black-xl',
+    '0-Black-38 (2XL)': 'https://example.com/product/pack6-black-2xl',
+    '0-Black-40 (3XL)': 'https://example.com/product/pack6-black-3xl',
+    '0-Black-42 (4XL)': 'https://example.com/product/pack6-black-4xl',
+    '0-Black-44 (5XL)': 'https://example.com/product/pack6-black-5xl',
+    '0-Black-46 (6XL)': 'https://example.com/product/pack6-black-6xl',
+    '0-Black-48 (7XL) - NEW': 'https://example.com/product/pack6-black-7xl',
+    '0-Black-50 (8XL) - NEW': 'https://example.com/product/pack6-black-8xl',
+    
+    '0-Grey-28 (XS)': 'https://example.com/product/pack6-grey-xs',
+    '0-Grey-30 (S)': 'https://example.com/product/pack6-grey-s',
+    '0-Grey-32 (M)': 'https://example.com/product/pack6-grey-m',
+    '0-Grey-34 (L)': 'https://example.com/product/pack6-grey-l',
+    '0-Grey-36 (XL)': 'https://example.com/product/pack6-grey-xl',
+    '0-Grey-38 (2XL)': 'https://example.com/product/pack6-grey-2xl',
+    '0-Grey-40 (3XL)': 'https://example.com/product/pack6-grey-3xl',
+    '0-Grey-42 (4XL)': 'https://example.com/product/pack6-grey-4xl',
+    '0-Grey-44 (5XL)': 'https://example.com/product/pack6-grey-5xl',
+    '0-Grey-46 (6XL)': 'https://example.com/product/pack6-grey-6xl',
+    '0-Grey-48 (7XL) - NEW': 'https://example.com/product/pack6-grey-7xl',
+    '0-Grey-50 (8XL) - NEW': 'https://example.com/product/pack6-grey-8xl',
+    
+    '0-Blue-28 (XS)': 'https://example.com/product/pack6-blue-xs',
+    '0-Blue-30 (S)': 'https://example.com/product/pack6-blue-s',
+    '0-Blue-32 (M)': 'https://example.com/product/pack6-blue-m',
+    '0-Blue-34 (L)': 'https://example.com/product/pack6-blue-l',
+    '0-Blue-36 (XL)': 'https://example.com/product/pack6-blue-xl',
+    '0-Blue-38 (2XL)': 'https://example.com/product/pack6-blue-2xl',
+    '0-Blue-40 (3XL)': 'https://example.com/product/pack6-blue-3xl',
+    '0-Blue-42 (4XL)': 'https://example.com/product/pack6-blue-4xl',
+    '0-Blue-44 (5XL)': 'https://example.com/product/pack6-blue-5xl',
+    '0-Blue-46 (6XL)': 'https://example.com/product/pack6-blue-6xl',
+    '0-Blue-48 (7XL) - NEW': 'https://example.com/product/pack6-blue-7xl',
+    '0-Blue-50 (8XL) - NEW': 'https://example.com/product/pack6-blue-8xl',
+    
+    '0-White-28 (XS)': 'https://example.com/product/pack6-white-xs',
+    '0-White-30 (S)': 'https://example.com/product/pack6-white-s',
+    '0-White-32 (M)': 'https://example.com/product/pack6-white-m',
+    '0-White-34 (L)': 'https://example.com/product/pack6-white-l',
+    '0-White-36 (XL)': 'https://example.com/product/pack6-white-xl',
+    '0-White-38 (2XL)': 'https://example.com/product/pack6-white-2xl',
+    '0-White-40 (3XL)': 'https://example.com/product/pack6-white-3xl',
+    '0-White-42 (4XL)': 'https://example.com/product/pack6-white-4xl',
+    '0-White-44 (5XL)': 'https://example.com/product/pack6-white-5xl',
+    '0-White-46 (6XL)': 'https://example.com/product/pack6-white-6xl',
+    '0-White-48 (7XL) - NEW': 'https://example.com/product/pack6-white-7xl',
+    '0-White-50 (8XL) - NEW': 'https://example.com/product/pack6-white-8xl',
+
+    // Pack of 4 (Offer 1)
+    '1-Black-28 (XS)': 'https://example.com/product/pack4-black-xs',
+    '1-Black-30 (S)': 'https://example.com/product/pack4-black-s',
+    '1-Black-32 (M)': 'https://example.com/product/pack4-black-m',
+    '1-Black-34 (L)': 'https://example.com/product/pack4-black-l',
+    '1-Black-36 (XL)': 'https://example.com/product/pack4-black-xl',
+    '1-Black-38 (2XL)': 'https://example.com/product/pack4-black-2xl',
+    '1-Black-40 (3XL)': 'https://example.com/product/pack4-black-3xl',
+    '1-Black-42 (4XL)': 'https://example.com/product/pack4-black-4xl',
+    '1-Black-44 (5XL)': 'https://example.com/product/pack4-black-5xl',
+    '1-Black-46 (6XL)': 'https://example.com/product/pack4-black-6xl',
+    '1-Black-48 (7XL) - NEW': 'https://example.com/product/pack4-black-7xl',
+    '1-Black-50 (8XL) - NEW': 'https://example.com/product/pack4-black-8xl',
+    
+    '1-Grey-28 (XS)': 'https://example.com/product/pack4-grey-xs',
+    '1-Grey-30 (S)': 'https://example.com/product/pack4-grey-s',
+    '1-Grey-32 (M)': 'https://example.com/product/pack4-grey-m',
+    '1-Grey-34 (L)': 'https://example.com/product/pack4-grey-l',
+    '1-Grey-36 (XL)': 'https://example.com/product/pack4-grey-xl',
+    '1-Grey-38 (2XL)': 'https://example.com/product/pack4-grey-2xl',
+    '1-Grey-40 (3XL)': 'https://example.com/product/pack4-grey-3xl',
+    '1-Grey-42 (4XL)': 'https://example.com/product/pack4-grey-4xl',
+    '1-Grey-44 (5XL)': 'https://example.com/product/pack4-grey-5xl',
+    '1-Grey-46 (6XL)': 'https://example.com/product/pack4-grey-6xl',
+    '1-Grey-48 (7XL) - NEW': 'https://example.com/product/pack4-grey-7xl',
+    '1-Grey-50 (8XL) - NEW': 'https://example.com/product/pack4-grey-8xl',
+    
+    '1-Blue-28 (XS)': 'https://example.com/product/pack4-blue-xs',
+    '1-Blue-30 (S)': 'https://example.com/product/pack4-blue-s',
+    '1-Blue-32 (M)': 'https://example.com/product/pack4-blue-m',
+    '1-Blue-34 (L)': 'https://example.com/product/pack4-blue-l',
+    '1-Blue-36 (XL)': 'https://example.com/product/pack4-blue-xl',
+    '1-Blue-38 (2XL)': 'https://example.com/product/pack4-blue-2xl',
+    '1-Blue-40 (3XL)': 'https://example.com/product/pack4-blue-3xl',
+    '1-Blue-42 (4XL)': 'https://example.com/product/pack4-blue-4xl',
+    '1-Blue-44 (5XL)': 'https://example.com/product/pack4-blue-5xl',
+    '1-Blue-46 (6XL)': 'https://example.com/product/pack4-blue-6xl',
+    '1-Blue-48 (7XL) - NEW': 'https://example.com/product/pack4-blue-7xl',
+    '1-Blue-50 (8XL) - NEW': 'https://example.com/product/pack4-blue-8xl',
+    
+    '1-White-28 (XS)': 'https://example.com/product/pack4-white-xs',
+    '1-White-30 (S)': 'https://example.com/product/pack4-white-s',
+    '1-White-32 (M)': 'https://example.com/product/pack4-white-m',
+    '1-White-34 (L)': 'https://example.com/product/pack4-white-l',
+    '1-White-36 (XL)': 'https://example.com/product/pack4-white-xl',
+    '1-White-38 (2XL)': 'https://example.com/product/pack4-white-2xl',
+    '1-White-40 (3XL)': 'https://example.com/product/pack4-white-3xl',
+    '1-White-42 (4XL)': 'https://example.com/product/pack4-white-4xl',
+    '1-White-44 (5XL)': 'https://example.com/product/pack4-white-5xl',
+    '1-White-46 (6XL)': 'https://example.com/product/pack4-white-6xl',
+    '1-White-48 (7XL) - NEW': 'https://example.com/product/pack4-white-7xl',
+    '1-White-50 (8XL) - NEW': 'https://example.com/product/pack4-white-8xl',
+
+    // Pack of 2 (Offer 2)
+    '2-Black-28 (XS)': 'https://example.com/product/pack2-black-xs',
+    '2-Black-30 (S)': 'https://example.com/product/pack2-black-s',
+    '2-Black-32 (M)': 'https://example.com/product/pack2-black-m',
+    '2-Black-34 (L)': 'https://example.com/product/pack2-black-l',
+    '2-Black-36 (XL)': 'https://example.com/product/pack2-black-xl',
+    '2-Black-38 (2XL)': 'https://example.com/product/pack2-black-2xl',
+    '2-Black-40 (3XL)': 'https://example.com/product/pack2-black-3xl',
+    '2-Black-42 (4XL)': 'https://example.com/product/pack2-black-4xl',
+    '2-Black-44 (5XL)': 'https://example.com/product/pack2-black-5xl',
+    '2-Black-46 (6XL)': 'https://example.com/product/pack2-black-6xl',
+    '2-Black-48 (7XL) - NEW': 'https://example.com/product/pack2-black-7xl',
+    '2-Black-50 (8XL) - NEW': 'https://example.com/product/pack2-black-8xl',
+    
+    '2-Grey-28 (XS)': 'https://example.com/product/pack2-grey-xs',
+    '2-Grey-30 (S)': 'https://example.com/product/pack2-grey-s',
+    '2-Grey-32 (M)': 'https://example.com/product/pack2-grey-m',
+    '2-Grey-34 (L)': 'https://example.com/product/pack2-grey-l',
+    '2-Grey-36 (XL)': 'https://example.com/product/pack2-grey-xl',
+    '2-Grey-38 (2XL)': 'https://example.com/product/pack2-grey-2xl',
+    '2-Grey-40 (3XL)': 'https://example.com/product/pack2-grey-3xl',
+    '2-Grey-42 (4XL)': 'https://example.com/product/pack2-grey-4xl',
+    '2-Grey-44 (5XL)': 'https://example.com/product/pack2-grey-5xl',
+    '2-Grey-46 (6XL)': 'https://example.com/product/pack2-grey-6xl',
+    '2-Grey-48 (7XL) - NEW': 'https://example.com/product/pack2-grey-7xl',
+    '2-Grey-50 (8XL) - NEW': 'https://example.com/product/pack2-grey-8xl',
+    
+    '2-Blue-28 (XS)': 'https://example.com/product/pack2-blue-xs',
+    '2-Blue-30 (S)': 'https://example.com/product/pack2-blue-s',
+    '2-Blue-32 (M)': 'https://example.com/product/pack2-blue-m',
+    '2-Blue-34 (L)': 'https://example.com/product/pack2-blue-l',
+    '2-Blue-36 (XL)': 'https://example.com/product/pack2-blue-xl',
+    '2-Blue-38 (2XL)': 'https://example.com/product/pack2-blue-2xl',
+    '2-Blue-40 (3XL)': 'https://example.com/product/pack2-blue-3xl',
+    '2-Blue-42 (4XL)': 'https://example.com/product/pack2-blue-4xl',
+    '2-Blue-44 (5XL)': 'https://example.com/product/pack2-blue-5xl',
+    '2-Blue-46 (6XL)': 'https://example.com/product/pack2-blue-6xl',
+    '2-Blue-48 (7XL) - NEW': 'https://example.com/product/pack2-blue-7xl',
+    '2-Blue-50 (8XL) - NEW': 'https://example.com/product/pack2-blue-8xl',
+    
+    '2-White-28 (XS)': 'https://example.com/product/pack2-white-xs',
+    '2-White-30 (S)': 'https://example.com/product/pack2-white-s',
+    '2-White-32 (M)': 'https://example.com/product/pack2-white-m',
+    '2-White-34 (L)': 'https://example.com/product/pack2-white-l',
+    '2-White-36 (XL)': 'https://example.com/product/pack2-white-xl',
+    '2-White-38 (2XL)': 'https://example.com/product/pack2-white-2xl',
+    '2-White-40 (3XL)': 'https://example.com/product/pack2-white-3xl',
+    '2-White-42 (4XL)': 'https://example.com/product/pack2-white-4xl',
+    '2-White-44 (5XL)': 'https://example.com/product/pack2-white-5xl',
+    '2-White-46 (6XL)': 'https://example.com/product/pack2-white-6xl',
+    '2-White-48 (7XL) - NEW': 'https://example.com/product/pack2-white-7xl',
+    '2-White-50 (8XL) - NEW': 'https://example.com/product/pack2-white-8xl'
+};
+
+// Function to get current selected variants
+function getCurrentVariants() {
+    const selectedOffer = document.querySelector('input[name="moonbundle-offer"]:checked');
+    if (!selectedOffer) return null;
+    
+    const offerIndex = selectedOffer.value;
+    const activeOption = document.querySelector(`.moonbundle-option[data-offer-index="${offerIndex}"]`);
+    if (!activeOption) return null;
+    
+    const variantSelects = activeOption.querySelectorAll('.moonbundle-select');
+    const variants = [];
+    
+    variantSelects.forEach(select => {
+        variants.push(select.value);
+    });
+    
+    return {
+        offer: offerIndex,
+        variants: variants
+    };
+}
+
+// Function to build variant key
+function buildVariantKey(offerIndex, variants) {
+    // For multi-variant products, use first variant (color and size)
+    if (variants.length >= 2) {
+        return `${offerIndex}-${variants[0]}-${variants[1]}`;
+    }
+    return `${offerIndex}-${variants[0]}`;
+}
+
+// Add click handler to Add to Cart button
+document.addEventListener('DOMContentLoaded', function() {
+    const addToCartBtn = document.getElementById('ProductSubmitButton-template--25316681285962__main');
+    
+    if (addToCartBtn) {
+        addToCartBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const currentVariants = getCurrentVariants();
+            if (!currentVariants) {
+                alert('Please select all options before proceeding.');
+                return;
+            }
+            
+            const variantKey = buildVariantKey(currentVariants.offer, currentVariants.variants);
+            const redirectUrl = variantUrls[variantKey];
+            
+            if (redirectUrl) {
+                window.location.href = redirectUrl;
+            } else {
+                alert('Selected variant is not available. Please choose different options.');
+                console.log('Variant key not found:', variantKey);
+            }
+        });
+    }
+});
+
+</script> -->
+
+//version 2.0
+<!-- <script>
+
+// Change all $ to £ on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Replace all $ symbols with £
+    const textNodes = document.createTreeWalker(
+        document.body,
+        NodeFilter.SHOW_TEXT,
+        null,
+        false
+    );
+    
+    let node;
+    while (node = textNodes.nextNode()) {
+        if (node.textContent.includes('$')) {
+            node.textContent = node.textContent.replace(/\$/g, '£');
+        }
+    }
+    
+    // Update main prices
+    const newPrices = document.querySelectorAll('.moonbundle-option-new-price');
+    if (newPrices.length >= 3) {
+        newPrices[0].textContent = '£49.99'; // Pack of 6
+        newPrices[1].textContent = '£39.99'; // Pack of 4
+        newPrices[2].textContent = '£29.99'; // Pack of 2
+    }
+});
+
+// Variant to URL mapping
+const variantUrls = {
+    // Pack of 6 (Offer 0)
+    '0-Black-28 (XS)': 'https://example.com/product/pack6-black-xs',
+    '0-Black-30 (S)': 'https://example.com/product/pack6-black-s',
+    '0-Black-32 (M)': 'https://example.com/product/pack6-black-m',
+    '0-Black-34 (L)': 'https://example.com/product/pack6-black-l',
+    '0-Black-36 (XL)': 'https://example.com/product/pack6-black-xl',
+    '0-Black-38 (2XL)': 'https://example.com/product/pack6-black-2xl',
+    '0-Black-40 (3XL)': 'https://example.com/product/pack6-black-3xl',
+    '0-Black-42 (4XL)': 'https://example.com/product/pack6-black-4xl',
+    '0-Black-44 (5XL)': 'https://example.com/product/pack6-black-5xl',
+    '0-Black-46 (6XL)': 'https://example.com/product/pack6-black-6xl',
+    '0-Black-48 (7XL) - NEW': 'https://example.com/product/pack6-black-7xl',
+    '0-Black-50 (8XL) - NEW': 'https://example.com/product/pack6-black-8xl',
+    
+    '0-Grey-28 (XS)': 'https://example.com/product/pack6-grey-xs',
+    '0-Grey-30 (S)': 'https://example.com/product/pack6-grey-s',
+    '0-Grey-32 (M)': 'https://example.com/product/pack6-grey-m',
+    '0-Grey-34 (L)': 'https://example.com/product/pack6-grey-l',
+    '0-Grey-36 (XL)': 'https://example.com/product/pack6-grey-xl',
+    '0-Grey-38 (2XL)': 'https://example.com/product/pack6-grey-2xl',
+    '0-Grey-40 (3XL)': 'https://example.com/product/pack6-grey-3xl',
+    '0-Grey-42 (4XL)': 'https://example.com/product/pack6-grey-4xl',
+    '0-Grey-44 (5XL)': 'https://example.com/product/pack6-grey-5xl',
+    '0-Grey-46 (6XL)': 'https://example.com/product/pack6-grey-6xl',
+    '0-Grey-48 (7XL) - NEW': 'https://example.com/product/pack6-grey-7xl',
+    '0-Grey-50 (8XL) - NEW': 'https://example.com/product/pack6-grey-8xl',
+    
+    '0-Blue-28 (XS)': 'https://example.com/product/pack6-blue-xs',
+    '0-Blue-30 (S)': 'https://example.com/product/pack6-blue-s',
+    '0-Blue-32 (M)': 'https://example.com/product/pack6-blue-m',
+    '0-Blue-34 (L)': 'https://example.com/product/pack6-blue-l',
+    '0-Blue-36 (XL)': 'https://example.com/product/pack6-blue-xl',
+    '0-Blue-38 (2XL)': 'https://example.com/product/pack6-blue-2xl',
+    '0-Blue-40 (3XL)': 'https://example.com/product/pack6-blue-3xl',
+    '0-Blue-42 (4XL)': 'https://example.com/product/pack6-blue-4xl',
+    '0-Blue-44 (5XL)': 'https://example.com/product/pack6-blue-5xl',
+    '0-Blue-46 (6XL)': 'https://example.com/product/pack6-blue-6xl',
+    '0-Blue-48 (7XL) - NEW': 'https://example.com/product/pack6-blue-7xl',
+    '0-Blue-50 (8XL) - NEW': 'https://example.com/product/pack6-blue-8xl',
+    
+    '0-White-28 (XS)': 'https://example.com/product/pack6-white-xs',
+    '0-White-30 (S)': 'https://example.com/product/pack6-white-s',
+    '0-White-32 (M)': 'https://example.com/product/pack6-white-m',
+    '0-White-34 (L)': 'https://example.com/product/pack6-white-l',
+    '0-White-36 (XL)': 'https://example.com/product/pack6-white-xl',
+    '0-White-38 (2XL)': 'https://example.com/product/pack6-white-2xl',
+    '0-White-40 (3XL)': 'https://example.com/product/pack6-white-3xl',
+    '0-White-42 (4XL)': 'https://example.com/product/pack6-white-4xl',
+    '0-White-44 (5XL)': 'https://example.com/product/pack6-white-5xl',
+    '0-White-46 (6XL)': 'https://example.com/product/pack6-white-6xl',
+    '0-White-48 (7XL) - NEW': 'https://example.com/product/pack6-white-7xl',
+    '0-White-50 (8XL) - NEW': 'https://example.com/product/pack6-white-8xl',
+
+    // Pack of 4 (Offer 1)
+    '1-Black-28 (XS)': 'https://example.com/product/pack4-black-xs',
+    '1-Black-30 (S)': 'https://example.com/product/pack4-black-s',
+    '1-Black-32 (M)': 'https://example.com/product/pack4-black-m',
+    '1-Black-34 (L)': 'https://example.com/product/pack4-black-l',
+    '1-Black-36 (XL)': 'https://example.com/product/pack4-black-xl',
+    '1-Black-38 (2XL)': 'https://example.com/product/pack4-black-2xl',
+    '1-Black-40 (3XL)': 'https://example.com/product/pack4-black-3xl',
+    '1-Black-42 (4XL)': 'https://example.com/product/pack4-black-4xl',
+    '1-Black-44 (5XL)': 'https://example.com/product/pack4-black-5xl',
+    '1-Black-46 (6XL)': 'https://example.com/product/pack4-black-6xl',
+    '1-Black-48 (7XL) - NEW': 'https://example.com/product/pack4-black-7xl',
+    '1-Black-50 (8XL) - NEW': 'https://example.com/product/pack4-black-8xl',
+    
+    '1-Grey-28 (XS)': 'https://example.com/product/pack4-grey-xs',
+    '1-Grey-30 (S)': 'https://example.com/product/pack4-grey-s',
+    '1-Grey-32 (M)': 'https://example.com/product/pack4-grey-m',
+    '1-Grey-34 (L)': 'https://example.com/product/pack4-grey-l',
+    '1-Grey-36 (XL)': 'https://example.com/product/pack4-grey-xl',
+    '1-Grey-38 (2XL)': 'https://example.com/product/pack4-grey-2xl',
+    '1-Grey-40 (3XL)': 'https://example.com/product/pack4-grey-3xl',
+    '1-Grey-42 (4XL)': 'https://example.com/product/pack4-grey-4xl',
+    '1-Grey-44 (5XL)': 'https://example.com/product/pack4-grey-5xl',
+    '1-Grey-46 (6XL)': 'https://example.com/product/pack4-grey-6xl',
+    '1-Grey-48 (7XL) - NEW': 'https://example.com/product/pack4-grey-7xl',
+    '1-Grey-50 (8XL) - NEW': 'https://example.com/product/pack4-grey-8xl',
+    
+    '1-Blue-28 (XS)': 'https://example.com/product/pack4-blue-xs',
+    '1-Blue-30 (S)': 'https://example.com/product/pack4-blue-s',
+    '1-Blue-32 (M)': 'https://example.com/product/pack4-blue-m',
+    '1-Blue-34 (L)': 'https://example.com/product/pack4-blue-l',
+    '1-Blue-36 (XL)': 'https://example.com/product/pack4-blue-xl',
+    '1-Blue-38 (2XL)': 'https://example.com/product/pack4-blue-2xl',
+    '1-Blue-40 (3XL)': 'https://example.com/product/pack4-blue-3xl',
+    '1-Blue-42 (4XL)': 'https://example.com/product/pack4-blue-4xl',
+    '1-Blue-44 (5XL)': 'https://example.com/product/pack4-blue-5xl',
+    '1-Blue-46 (6XL)': 'https://example.com/product/pack4-blue-6xl',
+    '1-Blue-48 (7XL) - NEW': 'https://example.com/product/pack4-blue-7xl',
+    '1-Blue-50 (8XL) - NEW': 'https://example.com/product/pack4-blue-8xl',
+    
+    '1-White-28 (XS)': 'https://example.com/product/pack4-white-xs',
+    '1-White-30 (S)': 'https://example.com/product/pack4-white-s',
+    '1-White-32 (M)': 'https://example.com/product/pack4-white-m',
+    '1-White-34 (L)': 'https://example.com/product/pack4-white-l',
+    '1-White-36 (XL)': 'https://example.com/product/pack4-white-xl',
+    '1-White-38 (2XL)': 'https://example.com/product/pack4-white-2xl',
+    '1-White-40 (3XL)': 'https://example.com/product/pack4-white-3xl',
+    '1-White-42 (4XL)': 'https://example.com/product/pack4-white-4xl',
+    '1-White-44 (5XL)': 'https://example.com/product/pack4-white-5xl',
+    '1-White-46 (6XL)': 'https://example.com/product/pack4-white-6xl',
+    '1-White-48 (7XL) - NEW': 'https://example.com/product/pack4-white-7xl',
+    '1-White-50 (8XL) - NEW': 'https://example.com/product/pack4-white-8xl',
+
+    // Pack of 2 (Offer 2)
+    '2-Black-28 (XS)': 'https://example.com/product/pack2-black-xs',
+    '2-Black-30 (S)': 'https://example.com/product/pack2-black-s',
+    '2-Black-32 (M)': 'https://example.com/product/pack2-black-m',
+    '2-Black-34 (L)': 'https://example.com/product/pack2-black-l',
+    '2-Black-36 (XL)': 'https://example.com/product/pack2-black-xl',
+    '2-Black-38 (2XL)': 'https://example.com/product/pack2-black-2xl',
+    '2-Black-40 (3XL)': 'https://example.com/product/pack2-black-3xl',
+    '2-Black-42 (4XL)': 'https://example.com/product/pack2-black-4xl',
+    '2-Black-44 (5XL)': 'https://example.com/product/pack2-black-5xl',
+    '2-Black-46 (6XL)': 'https://example.com/product/pack2-black-6xl',
+    '2-Black-48 (7XL) - NEW': 'https://example.com/product/pack2-black-7xl',
+    '2-Black-50 (8XL) - NEW': 'https://example.com/product/pack2-black-8xl',
+    
+    '2-Grey-28 (XS)': 'https://example.com/product/pack2-grey-xs',
+    '2-Grey-30 (S)': 'https://example.com/product/pack2-grey-s',
+    '2-Grey-32 (M)': 'https://example.com/product/pack2-grey-m',
+    '2-Grey-34 (L)': 'https://example.com/product/pack2-grey-l',
+    '2-Grey-36 (XL)': 'https://example.com/product/pack2-grey-xl',
+    '2-Grey-38 (2XL)': 'https://example.com/product/pack2-grey-2xl',
+    '2-Grey-40 (3XL)': 'https://example.com/product/pack2-grey-3xl',
+    '2-Grey-42 (4XL)': 'https://example.com/product/pack2-grey-4xl',
+    '2-Grey-44 (5XL)': 'https://example.com/product/pack2-grey-5xl',
+    '2-Grey-46 (6XL)': 'https://example.com/product/pack2-grey-6xl',
+    '2-Grey-48 (7XL) - NEW': 'https://example.com/product/pack2-grey-7xl',
+    '2-Grey-50 (8XL) - NEW': 'https://example.com/product/pack2-grey-8xl',
+    
+    '2-Blue-28 (XS)': 'https://example.com/product/pack2-blue-xs',
+    '2-Blue-30 (S)': 'https://example.com/product/pack2-blue-s',
+    '2-Blue-32 (M)': 'https://example.com/product/pack2-blue-m',
+    '2-Blue-34 (L)': 'https://example.com/product/pack2-blue-l',
+    '2-Blue-36 (XL)': 'https://example.com/product/pack2-blue-xl',
+    '2-Blue-38 (2XL)': 'https://example.com/product/pack2-blue-2xl',
+    '2-Blue-40 (3XL)': 'https://example.com/product/pack2-blue-3xl',
+    '2-Blue-42 (4XL)': 'https://example.com/product/pack2-blue-4xl',
+    '2-Blue-44 (5XL)': 'https://example.com/product/pack2-blue-5xl',
+    '2-Blue-46 (6XL)': 'https://example.com/product/pack2-blue-6xl',
+    '2-Blue-48 (7XL) - NEW': 'https://example.com/product/pack2-blue-7xl',
+    '2-Blue-50 (8XL) - NEW': 'https://example.com/product/pack2-blue-8xl',
+    
+    '2-White-28 (XS)': 'https://example.com/product/pack2-white-xs',
+    '2-White-30 (S)': 'https://example.com/product/pack2-white-s',
+    '2-White-32 (M)': 'https://example.com/product/pack2-white-m',
+    '2-White-34 (L)': 'https://example.com/product/pack2-white-l',
+    '2-White-36 (XL)': 'https://example.com/product/pack2-white-xl',
+    '2-White-38 (2XL)': 'https://example.com/product/pack2-white-2xl',
+    '2-White-40 (3XL)': 'https://example.com/product/pack2-white-3xl',
+    '2-White-42 (4XL)': 'https://example.com/product/pack2-white-4xl',
+    '2-White-44 (5XL)': 'https://example.com/product/pack2-white-5xl',
+    '2-White-46 (6XL)': 'https://example.com/product/pack2-white-6xl',
+    '2-White-48 (7XL) - NEW': 'https://example.com/product/pack2-white-7xl',
+    '2-White-50 (8XL) - NEW': 'https://example.com/product/pack2-white-8xl'
+};
+
+// Function to get current selected variants
+function getCurrentVariants() {
+    const selectedOffer = document.querySelector('input[name="moonbundle-offer"]:checked');
+    if (!selectedOffer) return null;
+    
+    const offerIndex = selectedOffer.value;
+    const activeOption = document.querySelector(`.moonbundle-option[data-offer-index="${offerIndex}"]`);
+    if (!activeOption) return null;
+    
+    const variantSelects = activeOption.querySelectorAll('.moonbundle-select');
+    const variants = [];
+    
+    variantSelects.forEach(select => {
+        variants.push(select.value);
+    });
+    
+    return {
+        offer: offerIndex,
+        variants: variants
+    };
+}
+
+// Function to build variant key
+function buildVariantKey(offerIndex, variants) {
+    // For multi-variant products, use first variant (color and size)
+    if (variants.length >= 2) {
+        return `${offerIndex}-${variants[0]}-${variants[1]}`;
+    }
+    return `${offerIndex}-${variants[0]}`;
+}
+
+// Add click handler to Add to Cart button
+document.addEventListener('DOMContentLoaded', function() {
+    const addToCartBtn = document.getElementById('ProductSubmitButton-template--25316681285962__main');
+    const form = document.getElementById('product-form-template--25316681285962__main');
+    
+    if (addToCartBtn) {
+        // Remove existing event listeners and prevent form submission
+        addToCartBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            
+            const currentVariants = getCurrentVariants();
+            if (!currentVariants) {
+                alert('Please select all options before proceeding.');
+                return false;
+            }
+            
+            const variantKey = buildVariantKey(currentVariants.offer, currentVariants.variants);
+            const redirectUrl = variantUrls[variantKey];
+            
+            if (redirectUrl) {
+                // Force immediate redirect
+                window.location.href = redirectUrl;
+                return false;
+            } else {
+                alert('Selected variant is not available. Please choose different options.');
+                console.log('Variant key not found:', variantKey);
+                return false;
+            }
+        }, true); // Use capture phase
+        
+        // Also prevent form submission
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }, true);
+        }
+        
+        // Override any existing click handlers
+        addToCartBtn.onclick = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const currentVariants = getCurrentVariants();
+            if (!currentVariants) {
+                alert('Please select all options before proceeding.');
+                return false;
+            }
+            
+            const variantKey = buildVariantKey(currentVariants.offer, currentVariants.variants);
+            const redirectUrl = variantUrls[variantKey];
+            
+            if (redirectUrl) {
+                window.location.href = redirectUrl;
+            } else {
+                alert('Selected variant is not available. Please choose different options.');
+                console.log('Variant key not found:', variantKey);
+            }
+            return false;
+        };
+    }
+});
+
+// Additional override to catch any modal triggers
+document.addEventListener('click', function(e) {
+    if (e.target && (e.target.id === 'ProductSubmitButton-template--25316681285962__main' || 
+        e.target.closest('#ProductSubmitButton-template--25316681285962__main'))) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        
+        const currentVariants = getCurrentVariants();
+        if (!currentVariants) {
+            alert('Please select all options before proceeding.');
+            return;
+        }
+        
+        const variantKey = buildVariantKey(currentVariants.offer, currentVariants.variants);
+        const redirectUrl = variantUrls[variantKey];
+        
+        if (redirectUrl) {
+            window.location.href = redirectUrl;
+        }
+    }
+}, true);
+
+</script> -->
+
+
+<script>
+
+// Function to update prices and currency
+function updatePricesAndCurrency() {
+    // Replace all $ symbols with £
+    const textNodes = document.createTreeWalker(
+        document.body,
+        NodeFilter.SHOW_TEXT,
+        null,
+        false
+    );
+    
+    let node;
+    while (node = textNodes.nextNode()) {
+        if (node.textContent.includes('$')) {
+            node.textContent = node.textContent.replace(/\$/g, '£');
+        }
+    }
+    
+    // Update main prices
+    const newPrices = document.querySelectorAll('.moonbundle-option-new-price');
+    if (newPrices.length >= 3) {
+        newPrices[0].textContent = '£49.99'; // Pack of 6
+        newPrices[1].textContent = '£39.99'; // Pack of 4
+        newPrices[2].textContent = '£29.99'; // Pack of 2
+    }
+}
+
+// Function to ensure add to cart button is always enabled
+function ensureAddToCartEnabled() {
+    const addToCartBtn = document.getElementById('ProductSubmitButton-template--25316681285962__main');
+    
+    if (addToCartBtn) {
+        // Always enable the button
+        addToCartBtn.disabled = false;
+        addToCartBtn.removeAttribute('disabled');
+        
+        // Ensure the text is always "ADD TO CART"
+        const btnText = addToCartBtn.querySelector('span');
+        if (btnText && btnText.textContent !== 'ADD TO CART') {
+            btnText.textContent = 'ADD TO CART';
+        }
+        
+        // Remove any "sold out" or disabled classes
+        addToCartBtn.classList.remove('disabled', 'sold-out');
+        
+        // Make sure it's visible
+        addToCartBtn.style.display = '';
+        addToCartBtn.style.visibility = 'visible';
+        addToCartBtn.style.opacity = '1';
+    }
+}
+
+// Run updates on page load
+document.addEventListener('DOMContentLoaded', function() {
+    updatePricesAndCurrency();
+    ensureAddToCartEnabled();
+});
+
+// Run updates every 5ms to maintain state
+setInterval(function() {
+    updatePricesAndCurrency();
+    ensureAddToCartEnabled();
+}, 5);
+
+// Variant to URL mapping
+const variantUrls = {
+    // Pack of 6 (Offer 0)
+    '0-Black-28 (XS)': 'https://example.com/product/pack6-black-xs',
+    '0-Black-30 (S)': 'https://example.com/product/pack6-black-s',
+    '0-Black-32 (M)': 'https://example.com/product/pack6-black-m',
+    '0-Black-34 (L)': 'https://example.com/product/pack6-black-l',
+    '0-Black-36 (XL)': 'https://example.com/product/pack6-black-xl',
+    '0-Black-38 (2XL)': 'https://example.com/product/pack6-black-2xl',
+    '0-Black-40 (3XL)': 'https://example.com/product/pack6-black-3xl',
+    '0-Black-42 (4XL)': 'https://example.com/product/pack6-black-4xl',
+    '0-Black-44 (5XL)': 'https://example.com/product/pack6-black-5xl',
+    '0-Black-46 (6XL)': 'https://example.com/product/pack6-black-6xl',
+    '0-Black-48 (7XL) - NEW': 'https://example.com/product/pack6-black-7xl',
+    '0-Black-50 (8XL) - NEW': 'https://example.com/product/pack6-black-8xl',
+    
+    '0-Grey-28 (XS)': 'https://example.com/product/pack6-grey-xs',
+    '0-Grey-30 (S)': 'https://example.com/product/pack6-grey-s',
+    '0-Grey-32 (M)': 'https://example.com/product/pack6-grey-m',
+    '0-Grey-34 (L)': 'https://example.com/product/pack6-grey-l',
+    '0-Grey-36 (XL)': 'https://example.com/product/pack6-grey-xl',
+    '0-Grey-38 (2XL)': 'https://example.com/product/pack6-grey-2xl',
+    '0-Grey-40 (3XL)': 'https://example.com/product/pack6-grey-3xl',
+    '0-Grey-42 (4XL)': 'https://example.com/product/pack6-grey-4xl',
+    '0-Grey-44 (5XL)': 'https://example.com/product/pack6-grey-5xl',
+    '0-Grey-46 (6XL)': 'https://example.com/product/pack6-grey-6xl',
+    '0-Grey-48 (7XL) - NEW': 'https://example.com/product/pack6-grey-7xl',
+    '0-Grey-50 (8XL) - NEW': 'https://example.com/product/pack6-grey-8xl',
+    
+    '0-Blue-28 (XS)': 'https://example.com/product/pack6-blue-xs',
+    '0-Blue-30 (S)': 'https://example.com/product/pack6-blue-s',
+    '0-Blue-32 (M)': 'https://example.com/product/pack6-blue-m',
+    '0-Blue-34 (L)': 'https://example.com/product/pack6-blue-l',
+    '0-Blue-36 (XL)': 'https://example.com/product/pack6-blue-xl',
+    '0-Blue-38 (2XL)': 'https://example.com/product/pack6-blue-2xl',
+    '0-Blue-40 (3XL)': 'https://example.com/product/pack6-blue-3xl',
+    '0-Blue-42 (4XL)': 'https://example.com/product/pack6-blue-4xl',
+    '0-Blue-44 (5XL)': 'https://example.com/product/pack6-blue-5xl',
+    '0-Blue-46 (6XL)': 'https://example.com/product/pack6-blue-6xl',
+    '0-Blue-48 (7XL) - NEW': 'https://example.com/product/pack6-blue-7xl',
+    '0-Blue-50 (8XL) - NEW': 'https://example.com/product/pack6-blue-8xl',
+    
+    '0-White-28 (XS)': 'https://example.com/product/pack6-white-xs',
+    '0-White-30 (S)': 'https://example.com/product/pack6-white-s',
+    '0-White-32 (M)': 'https://example.com/product/pack6-white-m',
+    '0-White-34 (L)': 'https://example.com/product/pack6-white-l',
+    '0-White-36 (XL)': 'https://example.com/product/pack6-white-xl',
+    '0-White-38 (2XL)': 'https://example.com/product/pack6-white-2xl',
+    '0-White-40 (3XL)': 'https://example.com/product/pack6-white-3xl',
+    '0-White-42 (4XL)': 'https://example.com/product/pack6-white-4xl',
+    '0-White-44 (5XL)': 'https://example.com/product/pack6-white-5xl',
+    '0-White-46 (6XL)': 'https://example.com/product/pack6-white-6xl',
+    '0-White-48 (7XL) - NEW': 'https://example.com/product/pack6-white-7xl',
+    '0-White-50 (8XL) - NEW': 'https://example.com/product/pack6-white-8xl',
+
+    // Pack of 4 (Offer 1)
+    '1-Black-28 (XS)': 'https://example.com/product/pack4-black-xs',
+    '1-Black-30 (S)': 'https://example.com/product/pack4-black-s',
+    '1-Black-32 (M)': 'https://example.com/product/pack4-black-m',
+    '1-Black-34 (L)': 'https://example.com/product/pack4-black-l',
+    '1-Black-36 (XL)': 'https://example.com/product/pack4-black-xl',
+    '1-Black-38 (2XL)': 'https://example.com/product/pack4-black-2xl',
+    '1-Black-40 (3XL)': 'https://example.com/product/pack4-black-3xl',
+    '1-Black-42 (4XL)': 'https://example.com/product/pack4-black-4xl',
+    '1-Black-44 (5XL)': 'https://example.com/product/pack4-black-5xl',
+    '1-Black-46 (6XL)': 'https://example.com/product/pack4-black-6xl',
+    '1-Black-48 (7XL) - NEW': 'https://example.com/product/pack4-black-7xl',
+    '1-Black-50 (8XL) - NEW': 'https://example.com/product/pack4-black-8xl',
+    
+    '1-Grey-28 (XS)': 'https://example.com/product/pack4-grey-xs',
+    '1-Grey-30 (S)': 'https://example.com/product/pack4-grey-s',
+    '1-Grey-32 (M)': 'https://example.com/product/pack4-grey-m',
+    '1-Grey-34 (L)': 'https://example.com/product/pack4-grey-l',
+    '1-Grey-36 (XL)': 'https://example.com/product/pack4-grey-xl',
+    '1-Grey-38 (2XL)': 'https://example.com/product/pack4-grey-2xl',
+    '1-Grey-40 (3XL)': 'https://example.com/product/pack4-grey-3xl',
+    '1-Grey-42 (4XL)': 'https://example.com/product/pack4-grey-4xl',
+    '1-Grey-44 (5XL)': 'https://example.com/product/pack4-grey-5xl',
+    '1-Grey-46 (6XL)': 'https://example.com/product/pack4-grey-6xl',
+    '1-Grey-48 (7XL) - NEW': 'https://example.com/product/pack4-grey-7xl',
+    '1-Grey-50 (8XL) - NEW': 'https://example.com/product/pack4-grey-8xl',
+    
+    '1-Blue-28 (XS)': 'https://example.com/product/pack4-blue-xs',
+    '1-Blue-30 (S)': 'https://example.com/product/pack4-blue-s',
+    '1-Blue-32 (M)': 'https://example.com/product/pack4-blue-m',
+    '1-Blue-34 (L)': 'https://example.com/product/pack4-blue-l',
+    '1-Blue-36 (XL)': 'https://example.com/product/pack4-blue-xl',
+    '1-Blue-38 (2XL)': 'https://example.com/product/pack4-blue-2xl',
+    '1-Blue-40 (3XL)': 'https://example.com/product/pack4-blue-3xl',
+    '1-Blue-42 (4XL)': 'https://example.com/product/pack4-blue-4xl',
+    '1-Blue-44 (5XL)': 'https://example.com/product/pack4-blue-5xl',
+    '1-Blue-46 (6XL)': 'https://example.com/product/pack4-blue-6xl',
+    '1-Blue-48 (7XL) - NEW': 'https://example.com/product/pack4-blue-7xl',
+    '1-Blue-50 (8XL) - NEW': 'https://example.com/product/pack4-blue-8xl',
+    
+    '1-White-28 (XS)': 'https://example.com/product/pack4-white-xs',
+    '1-White-30 (S)': 'https://example.com/product/pack4-white-s',
+    '1-White-32 (M)': 'https://example.com/product/pack4-white-m',
+    '1-White-34 (L)': 'https://example.com/product/pack4-white-l',
+    '1-White-36 (XL)': 'https://example.com/product/pack4-white-xl',
+    '1-White-38 (2XL)': 'https://example.com/product/pack4-white-2xl',
+    '1-White-40 (3XL)': 'https://example.com/product/pack4-white-3xl',
+    '1-White-42 (4XL)': 'https://example.com/product/pack4-white-4xl',
+    '1-White-44 (5XL)': 'https://example.com/product/pack4-white-5xl',
+    '1-White-46 (6XL)': 'https://example.com/product/pack4-white-6xl',
+    '1-White-48 (7XL) - NEW': 'https://example.com/product/pack4-white-7xl',
+    '1-White-50 (8XL) - NEW': 'https://example.com/product/pack4-white-8xl',
+
+    // Pack of 2 (Offer 2)
+    '2-Black-28 (XS)': 'https://example.com/product/pack2-black-xs',
+    '2-Black-30 (S)': 'https://example.com/product/pack2-black-s',
+    '2-Black-32 (M)': 'https://example.com/product/pack2-black-m',
+    '2-Black-34 (L)': 'https://example.com/product/pack2-black-l',
+    '2-Black-36 (XL)': 'https://example.com/product/pack2-black-xl',
+    '2-Black-38 (2XL)': 'https://example.com/product/pack2-black-2xl',
+    '2-Black-40 (3XL)': 'https://example.com/product/pack2-black-3xl',
+    '2-Black-42 (4XL)': 'https://example.com/product/pack2-black-4xl',
+    '2-Black-44 (5XL)': 'https://example.com/product/pack2-black-5xl',
+    '2-Black-46 (6XL)': 'https://example.com/product/pack2-black-6xl',
+    '2-Black-48 (7XL) - NEW': 'https://example.com/product/pack2-black-7xl',
+    '2-Black-50 (8XL) - NEW': 'https://example.com/product/pack2-black-8xl',
+    
+    '2-Grey-28 (XS)': 'https://example.com/product/pack2-grey-xs',
+    '2-Grey-30 (S)': 'https://example.com/product/pack2-grey-s',
+    '2-Grey-32 (M)': 'https://example.com/product/pack2-grey-m',
+    '2-Grey-34 (L)': 'https://example.com/product/pack2-grey-l',
+    '2-Grey-36 (XL)': 'https://example.com/product/pack2-grey-xl',
+    '2-Grey-38 (2XL)': 'https://example.com/product/pack2-grey-2xl',
+    '2-Grey-40 (3XL)': 'https://example.com/product/pack2-grey-3xl',
+    '2-Grey-42 (4XL)': 'https://example.com/product/pack2-grey-4xl',
+    '2-Grey-44 (5XL)': 'https://example.com/product/pack2-grey-5xl',
+    '2-Grey-46 (6XL)': 'https://example.com/product/pack2-grey-6xl',
+    '2-Grey-48 (7XL) - NEW': 'https://example.com/product/pack2-grey-7xl',
+    '2-Grey-50 (8XL) - NEW': 'https://example.com/product/pack2-grey-8xl',
+    
+    '2-Blue-28 (XS)': 'https://example.com/product/pack2-blue-xs',
+    '2-Blue-30 (S)': 'https://example.com/product/pack2-blue-s',
+    '2-Blue-32 (M)': 'https://example.com/product/pack2-blue-m',
+    '2-Blue-34 (L)': 'https://example.com/product/pack2-blue-l',
+    '2-Blue-36 (XL)': 'https://example.com/product/pack2-blue-xl',
+    '2-Blue-38 (2XL)': 'https://example.com/product/pack2-blue-2xl',
+    '2-Blue-40 (3XL)': 'https://example.com/product/pack2-blue-3xl',
+    '2-Blue-42 (4XL)': 'https://example.com/product/pack2-blue-4xl',
+    '2-Blue-44 (5XL)': 'https://example.com/product/pack2-blue-5xl',
+    '2-Blue-46 (6XL)': 'https://example.com/product/pack2-blue-6xl',
+    '2-Blue-48 (7XL) - NEW': 'https://example.com/product/pack2-blue-7xl',
+    '2-Blue-50 (8XL) - NEW': 'https://example.com/product/pack2-blue-8xl',
+    
+    '2-White-28 (XS)': 'https://example.com/product/pack2-white-xs',
+    '2-White-30 (S)': 'https://example.com/product/pack2-white-s',
+    '2-White-32 (M)': 'https://example.com/product/pack2-white-m',
+    '2-White-34 (L)': 'https://example.com/product/pack2-white-l',
+    '2-White-36 (XL)': 'https://example.com/product/pack2-white-xl',
+    '2-White-38 (2XL)': 'https://example.com/product/pack2-white-2xl',
+    '2-White-40 (3XL)': 'https://example.com/product/pack2-white-3xl',
+    '2-White-42 (4XL)': 'https://example.com/product/pack2-white-4xl',
+    '2-White-44 (5XL)': 'https://example.com/product/pack2-white-5xl',
+    '2-White-46 (6XL)': 'https://example.com/product/pack2-white-6xl',
+    '2-White-48 (7XL) - NEW': 'https://example.com/product/pack2-white-7xl',
+    '2-White-50 (8XL) - NEW': 'https://example.com/product/pack2-white-8xl'
+};
+
+// Function to get current selected variants
+function getCurrentVariants() {
+    const selectedOffer = document.querySelector('input[name="moonbundle-offer"]:checked');
+    if (!selectedOffer) return null;
+    
+    const offerIndex = selectedOffer.value;
+    const activeOption = document.querySelector(`.moonbundle-option[data-offer-index="${offerIndex}"]`);
+    if (!activeOption) return null;
+    
+    const variantSelects = activeOption.querySelectorAll('.moonbundle-select');
+    const variants = [];
+    
+    variantSelects.forEach(select => {
+        variants.push(select.value);
+    });
+    
+    return {
+        offer: offerIndex,
+        variants: variants
+    };
+}
+
+// Function to build variant key
+function buildVariantKey(offerIndex, variants) {
+    // For multi-variant products, use first variant (color and size)
+    if (variants.length >= 2) {
+        return `${offerIndex}-${variants[0]}-${variants[1]}`;
+    }
+    return `${offerIndex}-${variants[0]}`;
+}
+
+// Add click handler to Add to Cart button
+document.addEventListener('DOMContentLoaded', function() {
+    const addToCartBtn = document.getElementById('ProductSubmitButton-template--25316681285962__main');
+    const form = document.getElementById('product-form-template--25316681285962__main');
+    
+    if (addToCartBtn) {
+        // Remove existing event listeners and prevent form submission
+        addToCartBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            
+            const currentVariants = getCurrentVariants();
+            if (!currentVariants) {
+                alert('Please select all options before proceeding.');
+                return false;
+            }
+            
+            const variantKey = buildVariantKey(currentVariants.offer, currentVariants.variants);
+            const redirectUrl = variantUrls[variantKey];
+            
+            if (redirectUrl) {
+                // Force immediate redirect
+                window.location.href = redirectUrl;
+                return false;
+            } else {
+                alert('Selected variant is not available. Please choose different options.');
+                console.log('Variant key not found:', variantKey);
+                return false;
+            }
+        }, true); // Use capture phase
+        
+        // Also prevent form submission
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }, true);
+        }
+        
+        // Override any existing click handlers
+        addToCartBtn.onclick = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const currentVariants = getCurrentVariants();
+            if (!currentVariants) {
+                alert('Please select all options before proceeding.');
+                return false;
+            }
+            
+            const variantKey = buildVariantKey(currentVariants.offer, currentVariants.variants);
+            const redirectUrl = variantUrls[variantKey];
+            
+            if (redirectUrl) {
+                window.location.href = redirectUrl;
+            } else {
+                alert('Selected variant is not available. Please choose different options.');
+                console.log('Variant key not found:', variantKey);
+            }
+            return false;
+        };
+    }
+});
+
+// Additional override to catch any modal triggers
+document.addEventListener('click', function(e) {
+    if (e.target && (e.target.id === 'ProductSubmitButton-template--25316681285962__main' || 
+        e.target.closest('#ProductSubmitButton-template--25316681285962__main'))) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        
+        const currentVariants = getCurrentVariants();
+        if (!currentVariants) {
+            alert('Please select all options before proceeding.');
+            return;
+        }
+        
+        const variantKey = buildVariantKey(currentVariants.offer, currentVariants.variants);
+        const redirectUrl = variantUrls[variantKey];
+        
+        if (redirectUrl) {
+            window.location.href = redirectUrl;
+        }
+    }
+}, true);
+
+</script>
 
 </html>
